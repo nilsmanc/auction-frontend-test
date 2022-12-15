@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchUsers } from '../asyncActions'
+import { UserType } from '../../types'
 
+import { fetchUsers } from '../asyncActions'
 import { RootState } from '../store'
 
 const initialState = {
-  items: [],
+  items: [] as UserType[],
 }
 
 const usersSlice = createSlice({
