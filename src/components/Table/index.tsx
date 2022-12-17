@@ -1,20 +1,37 @@
-import { UserType } from '../../types'
+import { useState } from 'react'
+import { RoomType, UserType } from '../../types'
+import { Timer } from '../Timer'
 
 import styles from './Table.module.scss'
 
 type RoomProps = {
   users: UserType[]
+  room: RoomType
 }
 
-const Table: React.FC<RoomProps> = ({ users }) => {
+const Table: React.FC<RoomProps> = ({ users, room }) => {
+  const [usersIndex, setUsersIndex] = useState<number>(0)
+
   return (
-    <table>
-      <thead>
+    <table className={styles.table}>
+      <thead className={styles.head}>
         <tr>
-          <td>Ход</td>
+          <td>ХОД</td>
+          {users.map((user: UserType) => (
+            <td key={user._id}>
+              {user.index === usersIndex && (
+                <Timer
+                  setUsersIndex={setUsersIndex}
+                  usersIndex={usersIndex}
+                  startTime={room.startTime}
+                  usersCount={users.length}
+                />
+              )}
+            </td>
+          ))}
         </tr>
         <tr>
-          <td>Параметры и требования</td>
+          <td>ПАРАМЕТРЫ И ТРЕБОВАНИЯ</td>
           {users.map((user: UserType) => (
             <td key={user._id}>{user.name}</td>
           ))}
@@ -22,41 +39,50 @@ const Table: React.FC<RoomProps> = ({ users }) => {
       </thead>
       <tbody className={styles.body}>
         <tr>
-          <td>Наличие комплекса мероприятий, повышающих стандарты качества изготовления</td>
+          <td className={styles.complexTitle}>
+            Наличие комплекса мероприятий, повышающих стандарты качества изготовления
+          </td>
           {users.map((user: UserType) => (
-            <td key={user._id}>{user.complex ? '+' : '-'}</td>
+            <td className={styles.complexValues} key={user._id}>
+              {user.complex ? '+' : '-'}
+            </td>
           ))}
         </tr>
         <tr>
           <td>Срок изготолвения лота, дней</td>
           {users.map((user: UserType) => (
-            <td key={user._id}>{user.paymentTerms}</td>
+            <td className={styles.values} key={user._id}>
+              {user.term}
+            </td>
           ))}
         </tr>
         <tr>
           <td>Гарантийные обязательства, мес</td>
           {users.map((user: UserType) => (
-            <td key={user._id}>{user.guaranteeMonths}</td>
+            <td className={styles.values} key={user._id}>
+              {user.guaranteeMonths}
+            </td>
           ))}
         </tr>
         <tr>
           <td>Условия оплаты</td>
           {users.map((user: UserType) => (
-            <td key={user._id}>{user.paymentTerms}</td>
-          ))}
-        </tr>
-        <tr>
-          <td>Стоимость изготолвения лота, руб (без НДС)</td>
-          {users.map((user: UserType) => (
-            <td key={user._id}>
-              <p className={styles.price}>{user.price} руб.</p>
-              <p className={styles.tax}>-25,000 руб.</p>
-              <p className={styles.total}>2,475,000 руб.</p>
+            <td className={styles.values} key={user._id}>
+              {user.paymentTerms}
             </td>
           ))}
         </tr>
         <tr>
-          <td>Действия</td>
+          <td>Стоимость изготовления лота, руб (без НДС)</td>
+          {users.map((user: UserType) => (
+            <td className={styles.values} key={user._id}>
+              <div className={styles.prices}>
+                <p>{user.price} руб.</p>
+                <p>-25,000 руб.</p>
+                <p>2,475,000 руб.</p>
+              </div>
+            </td>
+          ))}
         </tr>
       </tbody>
     </table>

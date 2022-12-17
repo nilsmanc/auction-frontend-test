@@ -1,15 +1,51 @@
-.price {
-  color: blue;
-}
-
-.tax {
-  color: red;
-}
-
-.total {
-  color: green;
-}
-
 .body tr:nth-child(odd) {
-  background-color: rgba(128, 128, 128, 0.2);
+  background-color: rgba(128, 128, 128, 0.1);
+}
+
+.head {
+  color: blue;
+  text-align: center;
+  height: 200px;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 0;
+}
+
+.table td {
+  padding: 5px;
+}
+
+.body tr {
+  height: 30px;
+}
+
+.complexTitle {
+  border-top: 1px solid black;
+}
+
+.complexValues {
+  border-top: 1px solid black;
+  text-align: center;
+}
+
+.values {
+  text-align: center;
+}
+
+.prices p {
+  &:nth-child(1) {
+    color: blue;
+    margin: 5px;
+  }
+  &:nth-child(2) {
+    color: red;
+    margin: 5px;
+  }
+  &:nth-child(3) {
+    color: green;
+    margin: 5px;
+  }
 }

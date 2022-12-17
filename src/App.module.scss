@@ -1,8 +1,30 @@
 .title {
   color: red;
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+
+.title span {
+  font-weight: 600;
 }
 
 .subTitle {
+  display: inline-block;
   background-color: rgba(255, 0, 0, 0.1);
   color: red;
+  margin: 10px 0 20px 0;
+  padding: 0 5px;
+}
+
+.notification {
+  color: green;
+}
+
+.button {
+  background-color: white;
+  margin: 10px;
+  border: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }

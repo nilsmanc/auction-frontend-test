@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchRooms } from '../asyncActions'
 
+import { fetchRooms } from '../asyncActions'
 import { RootState } from '../store'
 
 const initialState = {
@@ -13,13 +13,13 @@ const roomsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchRooms.pending, (state) => {
-      state.items = []
+      state.items = {}
     })
     builder.addCase(fetchRooms.fulfilled, (state, action) => {
       state.items = action.payload
     })
     builder.addCase(fetchRooms.rejected, (state) => {
-      state.items = []
+      state.items = {}
     })
   },
 })
